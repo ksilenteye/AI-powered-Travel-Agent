@@ -1,0 +1,47 @@
+{
+  "entities": {
+    "UserPreference": {
+      "title": "User Preference",
+      "description": "Stores user travel preferences and history.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The UID of the user." },
+        "budgetLevel": { "type": "string", "enum": ["budget", "moderate", "luxury"], "description": "Preferred budget level." },
+        "transportPreference": { "type": "array", "items": { "type": "string" }, "description": "Preferred modes of transport." },
+        "stayPreference": { "type": "string", "description": "Preferred stay type (e.g., hotels, hostels, villas)." },
+        "interests": { "type": "array", "items": { "type": "string" }, "description": "Interests like mountains, sea, city, etc." },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId"]
+    },
+    "Trip": {
+      "title": "Trip",
+      "description": "Stores trip details and itineraries.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "destination": { "type": "string" },
+        "startDate": { "type": "string", "format": "date" },
+        "endDate": { "type": "string", "format": "date" },
+        "budget": { "type": "number" },
+        "transportType": { "type": "string" },
+        "itinerary": { "type": "string", "description": "JSON string of the day-by-day schedule." },
+        "weatherInfo": { "type": "string", "description": "Summary of weather conditions." },
+        "costBreakdown": { "type": "object", "description": "Breakdown of costs for transport, stay, etc." },
+        "status": { "type": "string", "enum": ["planning", "confirmed", "completed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "destination", "startDate", "endDate"]
+    }
+  },
+  "firestore": {
+    "/preferences/{preferenceId}": {
+      "schema": "UserPreference",
+      "description": "Collection of user preferences."
+    },
+    "/trips/{tripId}": {
+      "schema": "Trip",
+      "description": "Collection of planned trips."
+    }
+  }
+}

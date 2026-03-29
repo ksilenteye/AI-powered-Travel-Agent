@@ -1,0 +1,5 @@
+{
+  "name": "Travel Agent",
+  "description": "AI-powered travel planning assistant that manages itineraries, budgets, transportation, and stays based on user preferences.",
+  "requestFramePermissions": ["geolocation"]
+}
